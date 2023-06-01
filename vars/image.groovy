@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
-def call() {
+def call(String imageName) {
     withCredentials([usernamePassword(credentialsId: "Docker", usernameVariable: "USR", passwordVariable: "PASS")]) {
-        sh "docker build -t hari851995/java:v1.5 ."
+        sh "docker build -t $imageName ."
         sh "echo $PASS | docker login -u $USR --password-stdin"
-        sh "docker push hari851995/java:v1.5"
+        sh "docker $imageName"
     }
 }
